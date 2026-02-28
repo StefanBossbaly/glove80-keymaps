@@ -169,9 +169,8 @@
   #define KEY_RH_T6 DELETE
   #define LAY_RH_T6 LAYER_Lower
   #define KEY_RH_T5 BACKSPACE
-  #define LAY_RH_T5 LAYER_Mouse
+  #define LAY_RH_T5 LAYER_Symbol
   #define KEY_RH_T4 R
-  #define LAY_RH_T4 LAYER_Symbol
   #define KEY_RH_C2R6 PAGE_UP
   #define LAY_RH_C2R6 LAYER_World
   #define KEY_RH_C3R6 MOUSE_SCROLL_UP
@@ -261,9 +260,8 @@
   #define KEY_RH_T6 INSERT
   #define LAY_RH_T6 LAYER_Lower
   #define KEY_RH_T5 TAB
-  #define LAY_RH_T5 LAYER_Mouse
+  #define LAY_RH_T5 LAYER_Symbol
   #define KEY_RH_T4 SPACE
-  #define LAY_RH_T4 LAYER_Symbol
   #define KEY_RH_C2R6 PAGE_UP
   #define LAY_RH_C2R6 LAYER_World
   #define KEY_RH_C3R6 MOUSE_SCROLL_UP
@@ -353,9 +351,8 @@
   #define KEY_RH_T6 INSERT
   #define LAY_RH_T6 LAYER_Lower
   #define KEY_RH_T5 TAB
-  #define LAY_RH_T5 LAYER_Mouse
+  #define LAY_RH_T5 LAYER_Symbol
   #define KEY_RH_T4 SPACE
-  #define LAY_RH_T4 LAYER_Symbol
   #define KEY_RH_C2R6 PAGE_UP
   #define LAY_RH_C2R6 LAYER_World
   #define KEY_RH_C3R6 MOUSE_SCROLL_UP
@@ -445,9 +442,8 @@
   #define KEY_RH_T6 INSERT
   #define LAY_RH_T6 LAYER_Lower
   #define KEY_RH_T5 TAB
-  #define LAY_RH_T5 LAYER_Mouse
+  #define LAY_RH_T5 LAYER_Symbol
   #define KEY_RH_T4 SPACE
-  #define LAY_RH_T4 LAYER_Symbol
   #define KEY_RH_C2R6 PAGE_UP
   #define LAY_RH_C2R6 LAYER_World
   #define KEY_RH_C3R6 MOUSE_SCROLL_UP
@@ -1134,6 +1130,16 @@ behaviors {
   //
   #ifndef SPACE_HOLDING_TIME
   #define SPACE_HOLDING_TIME THUMB_HOLDING_TIME
+  #endif
+
+  //
+  // SPACE_STREAK_DECAY defines how long you need to wait (milliseconds)
+  // after typing before the space key can access its layer again.  It
+  // prevents the space key's layer-hold from activating during typing,
+  // which eliminates the lag caused by the hold-tap decision on space.
+  //
+  #ifndef SPACE_STREAK_DECAY
+  #define SPACE_STREAK_DECAY TAPPING_RESOLUTION
   #endif
 
   //
@@ -3038,6 +3044,7 @@ behaviors {
     flavor = SPACE_HOLDING_TYPE;
     tapping-term-ms = <SPACE_HOLDING_TIME>;
     quick-tap-ms = <SPACE_REPEAT_DECAY>; // enable repeat
+    require-prior-idle-ms = <SPACE_STREAK_DECAY>;
     #binding-cells = <2>;
     bindings = <&mo>, <&kp>;
     #ifdef SPACE_FORGIVENESS
